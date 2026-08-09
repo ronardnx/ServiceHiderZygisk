@@ -24,9 +24,7 @@ android {
 }
 
 zygisk {
-    // This is deliberately Java-only and has no ART method hook library.
-    // premain() installs a ServiceManager proxy before specialization.
-    packages('com.eltavine.duckdetector', 'com.chunqiunativecheck')
+    // Universal injection for all user application processes
     id = 'servicehiderzygisk'
     name = 'ServiceHider Zygisk'
     author = 'ronard'

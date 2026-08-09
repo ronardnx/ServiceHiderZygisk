@@ -13,7 +13,12 @@ public final class ZygoteEntry {
 
     public static void main() {
         try {
-            ServiceManagerProxy.install();
+            int uid = android.os.Process.myUid();
+            // Process.FIRST_APPLICATION_UID = 10000
+            // Apply ServiceManager proxy to all third-party/user apps
+            if (uid >= 10000) {
+                ServiceManagerProxy.install();
+            }
         } catch (Throwable t) {
             Log.e(TAG, "main", t);
         }
