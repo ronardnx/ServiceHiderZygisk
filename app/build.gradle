@@ -24,7 +24,7 @@ android {
 }
 
 zygisk {
-    packages('com.eltavine.duckdetector', 'com.chunqiunativecheck')
+    packages('com.eltavine.duckdetector', 'com.chunqiunativecheck', 'com.rem01gaming.disclosure')
     id = 'servicehiderzygisk'
     name = 'ServiceHider Zygisk'
     author = 'ronard'
