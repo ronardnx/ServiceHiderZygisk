@@ -1,0 +1,41 @@
+import com.v7878.zygisk.gradle.ZygoteLoader
+
+plugins {
+    id 'com.android.application'
+    id 'com.github.aerath-stuff.ZygoteLoader'
+}
+
+android {
+    namespace 'com.n0hindi.servicehider.zygisk'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.n0hindi.servicehider.zygisk'
+        minSdk 26
+        targetSdk 36
+        versionCode 1
+        versionName '1.0'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+zygisk {
+    // This is deliberately Java-only and has no ART method hook library.
+    // premain() installs a ServiceManager proxy before specialization.
+    packages('com.eltavine.duckdetector')
+    id = 'servicehiderzygisk'
+    name = 'ServiceHider Zygisk'
+    author = 'ronard'
+    description = 'Filters LineageOS ServiceManager calls without LSPosed or ART hooks'
+    entrypoint = 'com.n0hindi.servicehider.zygisk.ZygoteEntry'
+    archiveName = 'servicehider-zygisk'
+    attachNativeLibs = false
+    addVariantToArchiveName = false
+}
+
+dependencies {
+}

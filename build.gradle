@@ -1,0 +1,4 @@
+plugins {
+    id 'com.android.application' version '8.13.0' apply false
+    id 'com.github.aerath-stuff.ZygoteLoader' version 'bf5078e182ef4fa64c7bf1354c131fba4fe20412' apply false
+}

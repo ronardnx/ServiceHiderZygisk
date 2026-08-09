@@ -1,0 +1,13 @@
+[versions]
+agp = "8.13.0"
+r8-annotations = "v1.0.0"
+
+[libraries]
+r8-annotations = { module = "io.github.vova7878:R8Annotations", version.ref = "r8-annotations" }
+android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+
+[plugins]
+android-library = { id = "com.android.library", version.ref = "agp" }
+java-gradle-plugin = { id = 'java-gradle-plugin' }
+maven-publish = { id = 'maven-publish' }
+
