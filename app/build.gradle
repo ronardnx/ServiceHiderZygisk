@@ -24,7 +24,7 @@ android {
 }
 
 zygisk {
-    // Universal injection for all user application processes
+    packages('com.eltavine.duckdetector', 'com.chunqiunativecheck')
     id = 'servicehiderzygisk'
     name = 'ServiceHider Zygisk'
     author = 'ronard'
@@ -36,4 +36,25 @@ zygisk {
 }
 
 dependencies {
+}
+
+tasks.configureEach { task ->
+    if (task.name == 'zipMagiskRelease') {
+        task.doFirst {
+            def customizeDir = file("${buildDir}/intermediates/zygote_loader/customize_d/release")
+            if (customizeDir.exists()) {
+                new File(customizeDir, "40-auto-target-apps.sh").text = '''# Auto-target all installed third-party packages for Zygisk injection
+ui_print "- Targeting all installed user applications"
+mkdir -p "$MODPATH/packages"
+if command -v pm >/dev/null 2>&1; then
+    for pkg in $(pm list packages -3 2>/dev/null | cut -d: -f2); do
+        if [ -n "$pkg" ]; then
+            touch "$MODPATH/packages/$pkg"
+        fi
+    done
+fi
+'''
+            }
+        }
+    }
 }
